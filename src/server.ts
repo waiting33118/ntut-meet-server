@@ -5,9 +5,17 @@ enum SERVER {
   PORT = 3030
 }
 
+enum SERVER_URL {
+  DEV = 'localhost',
+  PROD = '0.0.0.0'
+}
+
+const HOSTNAME =
+  process.env.NODE_ENV === 'production' ? SERVER_URL.PROD : SERVER_URL.DEV;
+
 const wss = new Server(
   {
-    host: 'localhost',
+    host: HOSTNAME,
     port: SERVER.PORT
   },
   () => {
